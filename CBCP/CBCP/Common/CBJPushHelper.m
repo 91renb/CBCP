@@ -1,8 +1,8 @@
 //
 //  CBJPushHelper.m
-//  CaiBao
+//  CBCP
 //
-//  Created by LC on 2017/4/12.
+//  Created by LC on 2017/5/13.
 //  Copyright © 2017年 LC. All rights reserved.
 //
 

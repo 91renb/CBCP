@@ -7,17 +7,297 @@
 //
 
 #import "CBViewController.h"
-
 @interface CBViewController ()
+
+@property (nonatomic, assign) UIStatusBarStyle statusBarStyle;
+@property (nonatomic, assign) BOOL statusBarHidden;
+@property (nonatomic, assign) BOOL changeStatusBarAnimated;
 
 @end
 
 @implementation CBViewController
 
++ (instancetype)allocWithZone:(struct _NSZone *)zone {
+    
+    CBViewController *viewController = [super allocWithZone:zone];
+    
+    @weakify(viewController)
+    
+    [[viewController rac_signalForSelector:@selector(viewDidLoad)] subscribeNext:^(id x) {
+        
+        @strongify(viewController)
+        [viewController cb_addSubviews];
+        [viewController cb_bindViewModel];
+    }];
+    
+    [[viewController rac_signalForSelector:@selector(viewWillAppear:)] subscribeNext:^(id x) {
+        
+        @strongify(viewController)
+        [viewController cb_layoutNavigation];
+        [viewController cb_getNewData];
+    }];
+    
+    return viewController;
+}
+
+
+- (instancetype)initWithViewModel:(id<CBViewModelProtocol>)viewModel {
+    
+    self = [super init];
+    if (self) {
+        
+    }
+    return self;
+}
+
 - (void)viewDidLoad {
     [super viewDidLoad];
-    self.view.backgroundColor = [UIColor whiteColor];
+    
+    self.navigationController.interactivePopGestureRecognizer.enabled = YES;
     self.automaticallyAdjustsScrollViewInsets = NO;
+    self.view.backgroundColor = RGBCOLOR(246, 246, 246);
+    
+    [self cb_removeNavgationBarLine];
+    
+    [self layoutNavigationBar:ImageNamed(@"navi_background") titleColor:black_color titleFont:CB_YAHEI_FONT(18) leftBarButtonItem:nil rightBarButtonItem:nil];
+    
+    
+    
+    [self  addCustomNavigation];
+
+}
+
+- (void)viewWillAppear:(BOOL)animated{
+    [self  hideNavigationBar:YES animated:NO];
+}
+
+
+//添加导航栏
+- (void)addCustomNavigation{
+    self.navigationV = [[CBCustomNavigationView  alloc] initWithFrame:CGRectMake(0, 0,SCREEN_WIDTH, 64)];
+    [self.view  addSubview:self.navigationV];
+    
+    @weakify(self)
+    [RACObserve(self, Title) subscribeNext:^(NSString * x) {
+        @strongify(self)
+        self.navigationV.titleLable.text = x;
+    }];
+    
+    [[self.navigationV.backBtn  rac_signalForControlEvents:UIControlEventTouchUpInside] subscribeNext:^(id x) {
+        @strongify(self)
+        [self  goBackViewController];
+    }];
+    
+    [[self.navigationV.backMoreBtn  rac_signalForControlEvents:UIControlEventTouchUpInside] subscribeNext:^(id x) {
+        @strongify(self)
+        [self  goBackViewController];
+    }];
+    
+    [[self.navigationV.rightTextBtn  rac_signalForControlEvents:UIControlEventTouchUpInside]  subscribeNext:^(id x) {
+        @strongify(self)
+        [self  RightBtnEvent];
+    }];
+    
+    [[self.navigationV.rightImgBtn  rac_signalForControlEvents:UIControlEventTouchUpInside] subscribeNext:^(id x) {
+        @strongify(self)
+        [self  RightBtnEvent];
+    }];
+    
+}
+
+
+- (void)hideNavigationBar:(BOOL)isHide
+                 animated:(BOOL)animated{
+    
+    if (animated) {
+        [UIView animateWithDuration:0.25 animations:^{
+            //self.navigationController.navigationBarHidden=isHide;
+            self.navigationController.navigationBar.hidden = isHide;
+        }];
+    }
+    else{
+        //self.navigationController.navigationBarHidden=isHide;
+        self.navigationController.navigationBar.hidden = isHide;
+    }
+}
+
+#pragma mark - system
+
+- (UIStatusBarStyle)preferredStatusBarStyle {
+    
+    if (self.statusBarStyle) {
+        
+        return self.statusBarStyle;
+    } else {
+        
+        return UIStatusBarStyleLightContent;
+    }
+}
+
+- (BOOL)prefersStatusBarHidden {
+    
+    return self.statusBarHidden;
+}
+
+- (void)dealloc {
+    
+    NSLog(@"Running %@ '%@'", self.class, NSStringFromSelector(_cmd));
+}
+
+#pragma mark - private
+/**
+ *  去除nav 上的line
+ */
+- (void)cb_removeNavgationBarLine {
+    
+    if ([self.navigationController.navigationBar respondsToSelector:@selector(setBackgroundImage:forBarMetrics:)]){
+        
+        NSArray *list=self.navigationController.navigationBar.subviews;
+        
+        for (id obj in list) {
+            
+            if ([obj isKindOfClass:[UIImageView class]]) {
+                
+                UIImageView *imageView=(UIImageView *)obj;
+                
+                NSArray *list2=imageView.subviews;
+                
+                for (id obj2 in list2) {
+                    
+                    if ([obj2 isKindOfClass:[UIImageView class]]) {
+                        
+                        UIImageView *imageView2=(UIImageView *)obj2;
+                        
+                        imageView2.hidden=YES;
+                        
+                    }
+                }
+            }
+        }
+    }
+}
+
+
+- (void)changeStatusBarStyle:(UIStatusBarStyle)statusBarStyle
+             statusBarHidden:(BOOL)statusBarHidden
+     changeStatusBarAnimated:(BOOL)animated {
+    
+    self.statusBarStyle = statusBarStyle;
+    self.statusBarHidden = statusBarHidden;
+    if (animated) {
+        [UIView animateWithDuration:0.25 animations:^{
+            [self setNeedsStatusBarAppearanceUpdate];
+        }];
+    }
+    else{
+        [self setNeedsStatusBarAppearanceUpdate];
+    }
+}
+
+
+- (void)layoutNavigationBar:(UIImage*)backGroundImage
+                 titleColor:(UIColor*)titleColor
+                  titleFont:(UIFont*)titleFont
+          leftBarButtonItem:(UIBarButtonItem*)leftItem
+         rightBarButtonItem:(UIBarButtonItem*)rightItem {
+    
+    if (backGroundImage) {
+        [self.navigationController.navigationBar setBackgroundImage:backGroundImage forBarPosition:UIBarPositionAny barMetrics:UIBarMetricsDefault];
+    }
+    if (titleColor&&titleFont) {
+        [self.navigationController.navigationBar setTitleTextAttributes:@{NSForegroundColorAttributeName:titleColor,NSFontAttributeName:titleFont}];
+    }
+    else if (titleFont) {
+        [self.navigationController.navigationBar setTitleTextAttributes:@{NSFontAttributeName:titleFont}];
+    }
+    else if (titleColor){
+        [self.navigationController.navigationBar setTitleTextAttributes:@{NSForegroundColorAttributeName:titleColor}];
+    }
+    if (leftItem) {
+        self.navigationItem.leftBarButtonItem=leftItem;
+    }
+    if (rightItem) {
+        self.navigationItem.rightBarButtonItem=rightItem;
+    }
+}
+
+#pragma mark - 屏幕旋转
+- (UIInterfaceOrientationMask)supportedInterfaceOrientations {
+    
+    return UIInterfaceOrientationMaskPortrait;
+}
+
+- (BOOL)shouldAutorotate {
+    
+    return NO;
+}
+
+- (UIInterfaceOrientation)preferredInterfaceOrientationForPresentation {
+    
+    return UIInterfaceOrientationPortrait;
+}
+
+
+
+
+
+#pragma mark - RAC
+/**
+ *  添加控件
+ */
+- (void)cb_addSubviews
+{
+    
+}
+
+/**
+ *  绑定
+ */
+- (void)cb_bindViewModel
+{
+    
+}
+
+/**
+ *  设置navation
+ */
+- (void)cb_layoutNavigation
+{
+    
+}
+
+/**
+ *  初次获取数据
+ */
+- (void)cb_getNewData
+{
+    
+}
+
+
+
+- (void)goBackViewController
+{
+    [self.navigationController popViewControllerAnimated:YES];
+}
+
+- (void)RightBtnEvent{
+    
+}
+
+- (void)navigationRightText:(NSString *)rightText
+{
+    self.navigationV.rightTextBtn.hidden = NO;
+    [self.navigationV.rightTextBtn  setTitle:rightText forState:UIControlStateNormal];
+    self.navigationV.rightTextBtn.titleLabel.font = [UIFont  systemFontOfSize:15];
+    [self.navigationV.rightTextBtn  setTitleColor:white_color forState:UIControlStateNormal];
+    
+}
+
+- (void)navigationImgView:(NSString *)imageName
+{
+    [self.navigationV.rightImgBtn  setImage:ImageNamed(imageName) forState:UIControlStateNormal];
+    
 }
 
 - (void)didReceiveMemoryWarning {

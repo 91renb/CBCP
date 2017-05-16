@@ -10,4 +10,12 @@
 #define StringMacro_h
 
 
+#define String_NONetwork  @"暂无网络"
+
+#define String_RequestFailer  @"网络请求失败"
+
+#define String_UpLoadFailer  @"上传失败"
+
+#define String_DownLoadFailer  @"下载失败"
+
 #endif /* StringMacro_h */

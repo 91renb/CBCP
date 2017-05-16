@@ -24,6 +24,11 @@
 			<key>isShown</key>
 			<false/>
 		</dict>
+		<key>ReactiveCocoa.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
 		<key>SDWebImage.xcscheme</key>
 		<dict>
 			<key>isShown</key>
@@ -37,7 +42,17 @@
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>22873DF0FA18E699BA5A21B9CC2FB556</key>
+		<key>192201930BF9C07258972E20ACA45C7C</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>60D0777A302D5CD19139FF7D124C47BF</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>960801F65FF78FB41571197E6F924D05</key>
 		<dict>
 			<key>primary</key>
 			<true/>
@@ -48,11 +63,6 @@
 			<true/>
 		</dict>
 		<key>9E033EDB5EC0819481B0546434FA577B</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
-		<key>A1FAA00DF338444378557B40ECBF4127</key>
 		<dict>
 			<key>primary</key>
 			<true/>

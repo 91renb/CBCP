@@ -16,13 +16,6 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    
-    self.navigationBar.barTintColor = [UIColor whiteColor];
-    self.navigationBar.tintColor = Navi_Title_Color;
-    [self.navigationBar setTitleTextAttributes:
-     @{NSFontAttributeName:[UIFont boldSystemFontOfSize:18],
-       NSForegroundColorAttributeName:Navi_Title_Color}];
-
 }
 
 - (void)didReceiveMemoryWarning {
@@ -31,27 +24,23 @@
 }
 
 - (BOOL)shouldAutorotate {
-    return self.topViewController.shouldAutorotate;
+    
+    return YES;
 }
 
 - (UIInterfaceOrientationMask)supportedInterfaceOrientations {
-    return [self.topViewController supportedInterfaceOrientations];
+    
+    return [self.viewControllers.lastObject supportedInterfaceOrientations];
 }
 
-- (UIViewController *)childViewControllerForStatusBarStyle {
+- (UIInterfaceOrientation)preferredInterfaceOrientationForPresentation {
+    
+    return [self.viewControllers.lastObject preferredInterfaceOrientationForPresentation];
+}
+
+- (UIViewController *)childViewControllerForStatusBarStyle{
+    
     return self.topViewController;
-}
-
-- (UIViewController *)childViewControllerForStatusBarHidden {
-    return self.topViewController;
-}
-
-- (UIStatusBarStyle)preferredStatusBarStyle {
-    return self.topViewController.preferredStatusBarStyle;
-}
-
-- (BOOL)prefersStatusBarHidden {
-    return self.topViewController.prefersStatusBarHidden;
 }
 
 

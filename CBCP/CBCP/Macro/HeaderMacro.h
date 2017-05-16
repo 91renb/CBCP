@@ -10,16 +10,24 @@
 #define HeaderMacro_h
 
 
+#import "AppDelegate.h"
+
+
 #import "Masonry.h"
-#import "UIImageView+WebCache.h"
 #import "AFNetworking.h"
+#import "ReactiveCocoa.h"
+#import "UIImageView+WebCache.h"
 #import "JPUSHService.h"
+
+//Common
 #import "CBAlertHelper.h"
 #import "CBHttpManager.h"
 
 
+//Category
 #import "UIViewController+HUD.h"
 #import "UIColor+CBExt.h"
+#import "UIImage+Compression.h"
 
 
 //宏定义
@@ -28,5 +36,6 @@
 #import "URLMacro.h"
 #import "StringMacro.h"
 #import "NoticeMacro.h"
+#import "ConfigMacro.h"
 
 #endif /* HeaderMacro_h */

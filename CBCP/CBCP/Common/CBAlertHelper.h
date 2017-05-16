@@ -1,14 +1,14 @@
 //
 //  CBAlertHelper.h
-//  CaiBao
+//  CBCP
 //
-//  Created by LC on 2017/4/12.
+//  Created by LC on 2017/5/13.
 //  Copyright © 2017年 LC. All rights reserved.
 //
 
-#import "CBObject.h"
+#import <Foundation/Foundation.h>
 
-@interface CBAlertHelper : CBObject
+@interface CBAlertHelper : NSObject
 
 /**
  * 一个Action

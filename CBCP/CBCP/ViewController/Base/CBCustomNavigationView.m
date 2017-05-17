@@ -38,7 +38,7 @@
 {
     if (_backBtn == nil) {
         _backBtn =  [[UIButton  alloc] initWithFrame:CGRectMake(20, 32,12,19)];
-        [_backBtn  setImage:ImageNamed(@"Arrow_blue") forState:UIControlStateNormal];
+        [_backBtn  setImage:ImageNamed(@"public_back") forState:UIControlStateNormal];
     }
     return _backBtn;
 }
@@ -51,7 +51,7 @@
     return _backMoreBtn;
 }
 
-- (UILabel *)_TitleLable
+- (UILabel *)titleLable
 {
     if (_titleLable == nil) {
         _titleLable = [[UILabel  alloc] initWithFrame:CGRectMake(60, 33, SCREEN_WIDTH - 120, 19)];

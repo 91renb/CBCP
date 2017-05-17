@@ -50,8 +50,8 @@
 
 - (void)getData
 {
-    [self hideHud];
-    [self showHudInView:self.view hint:@"加载中…"];
+    DismissHud();
+    ShowMaskStatus(@"加载中…");
 
     NSString *urlStr = [NSString stringWithFormat:@"http://appmgr.jwoquxoc.com/frontApi/getAboutUs?appid=cbapp%@",Appid];
     [[CBHttpManager shareManager] requestWithPath:urlStr paramenters:@{} HttpRequestType:HttpRequestGet success:^(NSURLSessionDataTask *task, id responseObject) {
@@ -61,16 +61,16 @@
         
         if ([responseJSON[@"status"] isEqual:@1]) {
             if ([responseJSON[@"isshowwap"] isEqualToString:@"1"]) {
+                DismissHud();
                 if (self.callBack) {
                     self.callBack(YES,[responseJSON[@"wapurl"] length] ? responseJSON[@"wapurl"] : @"http://apps.cb8vip.com/");
                 }
-                [self hideHud];
                 return;
             }else{
+                DismissHud();
                 if (self.callBack) {
                     self.callBack(NO,@"");
                 }
-                [self hideHud];
                 return;
             }
         }

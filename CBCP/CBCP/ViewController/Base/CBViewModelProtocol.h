@@ -27,6 +27,6 @@ typedef enum : NSUInteger {
 /**
  *  初始化
  */
-- (void)CB_initialize;
+- (void)cb_initialize;
 
 @end

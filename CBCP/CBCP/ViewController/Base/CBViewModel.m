@@ -18,7 +18,7 @@
     
     if (viewModel) {
         
-        [viewModel CB_initialize];
+        [viewModel cb_initialize];
     }
     return viewModel;
 }
@@ -40,6 +40,9 @@
     return _httpManager;
 }
 
-- (void)CB_initialize {}
+- (void)cb_initialize
+{
+    
+}
 
 @end

@@ -18,11 +18,13 @@
 #import "ReactiveCocoa.h"
 #import "UIImageView+WebCache.h"
 #import "JPUSHService.h"
+#import "SVProgressHUD.h"
 
 //Common
+#import "CBJPushHelper.h"
 #import "CBAlertHelper.h"
 #import "CBHttpManager.h"
-
+#import "CBSVProgressHUD.h"
 
 //Category
 #import "UIViewController+HUD.h"

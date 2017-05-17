@@ -8,4 +8,5 @@ target ‘CBCP’ do
     pod 'Masonry', '~> 1.0.2’
     pod 'SDWebImage', '~> 3.8.2'
     pod 'ReactiveCocoa', '~> 2.5'
+    pod 'SVProgressHUD'
 end

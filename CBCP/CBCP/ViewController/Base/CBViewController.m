@@ -41,7 +41,8 @@
 }
 
 
-- (instancetype)initWithViewModel:(id<CBViewModelProtocol>)viewModel {
+- (instancetype)initWithViewModel:(id<CBViewModelProtocol>)viewModel
+{
     
     self = [super init];
     if (self) {
@@ -50,7 +51,8 @@
     return self;
 }
 
-- (void)viewDidLoad {
+- (void)viewDidLoad
+{
     [super viewDidLoad];
     
     self.navigationController.interactivePopGestureRecognizer.enabled = YES;
@@ -67,19 +69,22 @@
 
 }
 
-- (void)viewWillAppear:(BOOL)animated{
+- (void)viewWillAppear:(BOOL)animated
+{
     [self  hideNavigationBar:YES animated:NO];
 }
 
 
 //添加导航栏
-- (void)addCustomNavigation{
+- (void)addCustomNavigation
+{
     self.navigationV = [[CBCustomNavigationView  alloc] initWithFrame:CGRectMake(0, 0,SCREEN_WIDTH, 64)];
     [self.view  addSubview:self.navigationV];
     
     @weakify(self)
     [RACObserve(self, Title) subscribeNext:^(NSString * x) {
         @strongify(self)
+        NSLog(@"%@",x);
         self.navigationV.titleLable.text = x;
     }];
     
@@ -107,7 +112,8 @@
 
 
 - (void)hideNavigationBar:(BOOL)isHide
-                 animated:(BOOL)animated{
+                 animated:(BOOL)animated
+{
     
     if (animated) {
         [UIView animateWithDuration:0.25 animations:^{
@@ -123,7 +129,8 @@
 
 #pragma mark - system
 
-- (UIStatusBarStyle)preferredStatusBarStyle {
+- (UIStatusBarStyle)preferredStatusBarStyle
+{
     
     if (self.statusBarStyle) {
         
@@ -134,12 +141,14 @@
     }
 }
 
-- (BOOL)prefersStatusBarHidden {
+- (BOOL)prefersStatusBarHidden
+{
     
     return self.statusBarHidden;
 }
 
-- (void)dealloc {
+- (void)dealloc
+{
     
     NSLog(@"Running %@ '%@'", self.class, NSStringFromSelector(_cmd));
 }

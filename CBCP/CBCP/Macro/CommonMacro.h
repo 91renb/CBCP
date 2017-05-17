@@ -25,6 +25,7 @@
 
 
 #define  WeakSelf(x)   __weak typeof(*&self)x = self
+#define WS(weakSelf)  __weak __typeof(&*self)weakSelf = self;
 
 // 微软雅黑
 #define CB_YAHEI_FONT(FONTSIZE) [UIFont fontWithName:@"MicrosoftYaHei" size:(FONTSIZE)]

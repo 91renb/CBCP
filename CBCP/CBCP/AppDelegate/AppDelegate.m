@@ -11,6 +11,8 @@
 #import "CBJPushHelper.h"
 #import "LaunchViewController.h"
 #import "ViewController.h"
+#import "MainViewController.h"
+#import "LoginViewController.h"
 
 @interface AppDelegate ()
 
@@ -51,30 +53,13 @@
 
 - (void)changeRootViewController:(NSNotification *)sender
 {
-    
-    if (sender.userInfo) {
-        
-//        self.mainViewController = [[CBMainViewController alloc] init];
+//    if (sender.userInfo) {
 //        
-//        LeftViewController *leftMenuViewController = [[LeftViewController alloc] init];
-//        
-//        RESideMenu *sideMenuViewController = [[RESideMenu alloc] initWithContentViewController:self.mainViewController
-//                                                                        leftMenuViewController:leftMenuViewController
-//                                                                       rightMenuViewController:nil];
-//        sideMenuViewController.backgroundImage = [UIImage imageNamed:@"Stars"];
-//        sideMenuViewController.menuPreferredStatusBarStyle = 1; // UIStatusBarStyleLightContent
-//        sideMenuViewController.delegate = self;
-//        sideMenuViewController.contentViewShadowColor = [UIColor blackColor];
-//        sideMenuViewController.contentViewShadowOffset = CGSizeMake(0, 0);
-//        sideMenuViewController.contentViewShadowOpacity = 1;
-//        sideMenuViewController.contentViewShadowRadius = 12;
-//        sideMenuViewController.contentViewShadowEnabled = YES;
-//        sideMenuViewController.contentViewScaleValue = 1;
-//        self.window.rootViewController = sideMenuViewController;
-        
-    }else{
+        self.window.rootViewController = [[MainViewController alloc] init];
+//
+//    }else{
 //        self.window.rootViewController = [LoginViewController new];
-    }
+//    }
 }
 
 

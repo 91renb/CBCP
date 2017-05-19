@@ -30,7 +30,9 @@
     
     [self.listView mas_makeConstraints:^(MASConstraintMaker *make) {
         
-        make.edges.equalTo(weakSelf.view);
+        make.left.right.equalTo(weakSelf.view);
+        make.top.equalTo(@64);
+        make.bottom.equalTo(@(-49));
     }];
     
     [super updateViewConstraints];
@@ -51,7 +53,7 @@
 
 - (void)cb_addSubviews
 {
-    [self.view addSubview:self.listView];
+    [self.view insertSubview:self.listView belowSubview:self.navigationV];
 
 }
 
@@ -71,7 +73,6 @@
     }
     return _listView;
 }
-
 
 - (HomeListViewModel *)viewModel
 {

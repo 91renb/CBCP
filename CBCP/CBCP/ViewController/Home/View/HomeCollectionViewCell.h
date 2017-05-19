@@ -8,6 +8,10 @@
 
 #import "CBCollectionViewCell.h"
 
+@class HomeListModel;
+
 @interface HomeCollectionViewCell : CBCollectionViewCell
+
+@property (nonatomic ,strong) HomeListModel *model;
 
 @end

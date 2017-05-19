@@ -18,7 +18,6 @@
     [self.refreshDataCommand.executionSignals.switchToLatest subscribeNext:^(id data) {
         @strongify(self);
         NSDictionary *responseJSON = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableLeaves error:nil];
-        NSLog(@"%@",responseJSON);
 
         NSMutableArray *headerArray = [NSMutableArray new];
         NSArray *headArr = [responseJSON objectForKey:@"adInfo"];
@@ -41,12 +40,17 @@
         for (NSDictionary *dic in listArr) {
             HomeListModel *model = [[HomeListModel alloc] init];
             [model setValuesForKeysWithDictionary:[dic objectForKey:@"attribute"]];
-            [headerArray addObject:model];
+            if (model.category.length) {
+                
+                [listArray addObject:model];
+            }
         }
         self.dataArray = listArray;
         
-        [self.headerViewModel.refreshUISubject sendNext:nil];
-        [self.youLikeViewModel.refreshUISubject sendNext:nil];
+        NSLog(@"%ld",self.dataArray.count);
+        [self.refreshUI sendNext:nil];
+//        [self.headerViewModel.refreshUISubject sendNext:nil];
+//        [self.refreshEndSubject sendNext:@(CBHeaderRefresh_HasNoMoreData)];
         
         DismissHud();
     }];
@@ -145,7 +149,8 @@
 
 
 
-- (NSArray *)dataArray {
+- (NSArray *)dataArray
+{
     
     if (!_dataArray) {
         
@@ -155,8 +160,8 @@
     return _dataArray;
 }
 
-- (RACSubject *)cellClickSubject {
-    
+- (RACSubject *)cellClickSubject
+{
     if (!_cellClickSubject) {
         
         _cellClickSubject = [RACSubject subject];

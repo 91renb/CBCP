@@ -26,4 +26,6 @@
 
 @property (nonatomic ,copy) NSString *maxPeriods;
 
+@property (nonatomic ,copy) NSString *badgeIcon;
+
 @end

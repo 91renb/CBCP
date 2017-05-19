@@ -19,6 +19,8 @@
 #import "UIImageView+WebCache.h"
 #import "JPUSHService.h"
 #import "SVProgressHUD.h"
+#import "MJRefresh.h"
+
 
 //Common
 #import "CBJPushHelper.h"

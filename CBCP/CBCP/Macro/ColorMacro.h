@@ -17,7 +17,7 @@
 #define ALLVIEWBACKCOLOR          CB_rgb(246, 246, 246)
 #define Navi_Title_Color          CB_rgb(15, 136, 235)
 
-
-
+#define CB_rgb_81                 CB_rgb(81,81,81)
+#define CB_rgb_51                 CB_rgb(51,51,51)
 
 #endif /* ColorMacro_h */

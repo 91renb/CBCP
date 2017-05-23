@@ -9,7 +9,7 @@
 #import "HomeListView.h"
 #import "HomeListViewModel.h"
 #import "HomeCollectionViewCell.h"
-
+#import "HomeHeaderView.h"
 @interface HomeListView ()<UICollectionViewDelegate,UICollectionViewDataSource>
 
 @property (strong, nonatomic) HomeListViewModel *viewModel;
@@ -54,10 +54,10 @@
     
     [self.viewModel.refreshUI subscribeNext:^(id x) {
         @strongify(self);
-        [self.collectionView reloadSections:[NSIndexSet indexSetWithIndex:0]];
+        [self.collectionView reloadData];
     }];
     
-    }
+}
 
 
 - (UICollectionView *)collectionView
@@ -70,7 +70,7 @@
         _collectionView.backgroundColor = ALLVIEWBACKCOLOR;
         _collectionView.showsHorizontalScrollIndicator = NO;
         [_collectionView registerClass:[HomeCollectionViewCell class] forCellWithReuseIdentifier:[NSString stringWithUTF8String:object_getClassName([HomeCollectionViewCell class])]];
-
+//        [_collectionView registerClass:[UICollectionReusableView class] forSupplementaryViewOfKind:UICollectionElementKindSectionHeader withReuseIdentifier:[NSString stringWithUTF8String:object_getClassName([UICollectionReusableView class])]];
     }
     
     return _collectionView;
@@ -84,6 +84,8 @@
         _flowLayout.scrollDirection = UICollectionViewScrollDirectionVertical;
         _flowLayout.minimumInteritemSpacing = 10;
         _flowLayout.minimumLineSpacing = 10;
+//        _flowLayout.headerReferenceSize = CGSizeMake(self.frame.size.width, SCREEN_WIDTH/2 + 20 + 40); //设置collectionView头视图的大小
+
     }
     
     return _flowLayout;
@@ -135,7 +137,16 @@
 //        }
 //        headerView.backgroundColor = [UIColor grayColor];
 //        
-//        return headerView;
+//        
+//        HomeHeaderView *homeHeaderView = [[HomeHeaderView alloc] initWithViewModel:self.viewModel];
+//        [headerView addSubview:homeHeaderView];
+//        [homeHeaderView mas_makeConstraints:^(MASConstraintMaker *make) {
+//            make.left.right.top.equalTo(0);
+//            make.bottom.equalTo(@10);
+//        }];
+//        
+//        
+//        return homeHeaderView;
 //    }
 //    else if([kind isEqualToString:UICollectionElementKindSectionFooter])
 //    {

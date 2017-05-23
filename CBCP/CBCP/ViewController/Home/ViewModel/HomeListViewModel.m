@@ -32,7 +32,7 @@
         HomeYouLikeModel *likeModel = [[HomeYouLikeModel alloc] init];
         likeModel.imageUrl = @"http://pimg1.126.net/caipiao_info/images/headFigure/newAppHall/1494937371917_1.jpg";
         likeModel.linkUrl = @"https://caipiao.163.com/nfop/88hb/index.htm";
-        self.youLikeViewModel.dataArray = @[likeModel];
+        self.headerViewModel.likeModel = likeModel;
         
         
         NSMutableArray *listArray = [NSMutableArray new];
@@ -48,8 +48,8 @@
         self.dataArray = listArray;
         
         NSLog(@"%ld",self.dataArray.count);
-        [self.refreshUI sendNext:nil];
 //        [self.headerViewModel.refreshUISubject sendNext:nil];
+        [self.refreshUI sendNext:nil];
 //        [self.refreshEndSubject sendNext:@(CBHeaderRefresh_HasNoMoreData)];
         
         DismissHud();
@@ -136,18 +136,6 @@
     }
     return _headerViewModel;
 }
-
-- (HomeYouLikeViewModel *)youLikeViewModel
-{
-    if (!_youLikeViewModel) {
-        _youLikeViewModel = [[HomeYouLikeViewModel alloc] init];
-        _youLikeViewModel.title = @"猜你喜欢";
-        _youLikeViewModel.cellClickSubject = self.cellClickSubject;
-    }
-    return _youLikeViewModel;
-}
-
-
 
 - (NSArray *)dataArray
 {

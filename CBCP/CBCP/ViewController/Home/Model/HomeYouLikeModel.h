@@ -14,4 +14,6 @@
 
 @property (nonatomic ,copy) NSString *linkUrl;
 
+@property (nonatomic ,copy) NSString *title;
+
 @end

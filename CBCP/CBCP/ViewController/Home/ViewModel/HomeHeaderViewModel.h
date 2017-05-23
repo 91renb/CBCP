@@ -7,13 +7,17 @@
 //
 
 #import "CBViewModel.h"
+#import "HomeYouLikeModel.h"
 
 @interface HomeHeaderViewModel : CBViewModel
+
 
 @property (nonatomic, strong) NSArray *dataArray;
 
 @property (nonatomic, strong) RACSubject *refreshUISubject;
 
 @property (nonatomic, strong) RACSubject *cellClickSubject;
+
+@property (nonatomic ,strong) HomeYouLikeModel *likeModel;
 
 @end

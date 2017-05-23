@@ -61,7 +61,6 @@
 {
     self.navigationV.backBtn.hidden = YES;
     self.Title = @"首页";
-
 }
 
 

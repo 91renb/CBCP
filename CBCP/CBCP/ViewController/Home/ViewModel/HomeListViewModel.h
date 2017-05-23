@@ -7,7 +7,6 @@
 //
 
 #import "CBViewModel.h"
-#import "HomeYouLikeViewModel.h"
 #import "HomeHeaderViewModel.h"
 
 @interface HomeListViewModel : CBViewModel
@@ -18,8 +17,6 @@
 @property (nonatomic, strong) RACSubject *refreshUI;
 
 @property (nonatomic, strong) RACCommand *refreshDataCommand;
-
-@property (nonatomic ,strong) HomeYouLikeViewModel *youLikeViewModel;
 
 @property (nonatomic ,strong) HomeHeaderViewModel *headerViewModel;
 

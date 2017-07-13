@@ -20,4 +20,6 @@
 
 @property (nonatomic, strong) RACSubject *cellClickSubject;
 
+@property (nonatomic ,copy) NSString *boardId;
+
 @end

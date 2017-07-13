@@ -21,7 +21,8 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    // Do any additional setup after loading the view.
+    self.navigationV.backBtn.hidden = YES;
+
 }
 
 - (void)updateViewConstraints
@@ -59,7 +60,6 @@
 
 - (void)cb_layoutNavigation
 {
-    self.navigationV.backBtn.hidden = YES;
     self.Title = @"首页";
 }
 

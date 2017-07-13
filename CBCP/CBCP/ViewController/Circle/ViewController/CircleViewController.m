@@ -28,7 +28,8 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    // Do any additional setup after loading the view.
+    self.navigationV.backBtn.hidden = YES;
+
 }
 
 
@@ -39,31 +40,30 @@
     [self.titleView mas_makeConstraints:^(MASConstraintMaker *make) {
     
         make.top.equalTo(weakSelf.navigationV).offset(27);
-        make.centerX.equalTo(weakSelf.navigationV);
+        make.centerX.mas_equalTo(weakSelf.navigationV);
         make.width.offset(120);
         make.height.offset(30);
         
     }];
     [button_hot mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.equalTo(weakSelf.titleView);
-        make.top.bottom.equalTo(weakSelf.titleView);
+        make.left.mas_equalTo(weakSelf.titleView);
+        make.top.bottom.mas_equalTo(weakSelf.titleView);
         make.width.offset(60);
     }];
     [button_all mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.right.equalTo(weakSelf.titleView);
-        make.top.bottom.equalTo(weakSelf.titleView);
+        make.right.mas_equalTo(weakSelf.titleView);
+        make.top.bottom.mas_equalTo(weakSelf.titleView);
         make.width.offset(60);
     }];
-    
     [self.hotViewController.view mas_makeConstraints:^(MASConstraintMaker *make) {
         
-        make.left.right.equalTo(weakSelf.view);
-        make.top.equalTo(@64);
-        make.bottom.equalTo(@(-49));
+        make.left.right.mas_equalTo(weakSelf.view);
+        make.top.mas_equalTo(64);
+        make.bottom.mas_equalTo(-49);
         
     }];
     
-    
+//
     
     [super updateViewConstraints];
 }
@@ -76,18 +76,14 @@
     [self addChildViewController:self.allViewController];
     
     currentVC = self.hotViewController;
-    [self.view insertSubview:self.hotViewController.view belowSubview:self.navigationV];
+    [self.view addSubview:self.hotViewController.view];
     
 }
 
 - (void)cb_layoutNavigation
 {
-    self.navigationV.backBtn.hidden = YES;
-
-    [self.navigationV.titleLable removeFromSuperview];
     [self.navigationV addSubview:self.titleView];
-    button_hot.userInteractionEnabled = NO;
-    button_all.userInteractionEnabled = YES;
+    [self.navigationV.titleLable removeFromSuperview];
 }
 
 - (void)cb_bindViewModel
@@ -96,42 +92,6 @@
 }
 
 
-
-
-
-- (UIView *)titleView
-{
-    if (!_titleView) {
-        _titleView = [[UIView alloc] init];
-        
-        button_hot = [UIButton buttonWithType:UIButtonTypeCustom];
-
-        [button_hot setTitle:@"热帖" forState:UIControlStateNormal];
-        [button_hot setTitleColor:Navi_Title_Color forState:UIControlStateNormal];
-        button_hot.layer.borderWidth = 1;
-        button_hot.layer.borderColor = white_color.CGColor;
-        button_hot.backgroundColor = white_color;
-        [button_hot addTarget:self action:@selector(touchButtonHot:) forControlEvents:UIControlEventTouchUpInside];
-        button_hot.titleLabel.font = [UIFont systemFontOfSize:14];
-        
-        
-        button_all = [UIButton buttonWithType:UIButtonTypeCustom];
-
-        [button_all setTitle:@"圈子" forState:UIControlStateNormal];
-        [button_all setTitleColor:white_color forState:UIControlStateNormal];
-        button_all.layer.borderWidth = 1;
-        button_all.layer.borderColor = white_color.CGColor;
-        button_all.backgroundColor = Navi_Title_Color;
-        [button_all addTarget:self action:@selector(touchButtonAll:) forControlEvents:UIControlEventTouchUpInside];
-        button_all.titleLabel.font = [UIFont systemFontOfSize:14];
-        
-        
-        
-        [_titleView addSubview:button_hot];
-        [_titleView addSubview:button_all];
-    }
-    return _titleView;
-}
 
 - (void)touchButtonHot:(UIButton *)button
 {
@@ -147,12 +107,12 @@
     
     
     [self transitionFromOldViewController:currentVC toNewViewController:self.hotViewController];
-    WS(weakSelf);
+    WS(weakSelf)
     [self.hotViewController.view mas_makeConstraints:^(MASConstraintMaker *make) {
         
-        make.left.right.equalTo(weakSelf.view);
-        make.top.equalTo(@64);
-        make.bottom.equalTo(@(-49));
+        make.left.right.mas_equalTo(weakSelf.view);
+        make.top.mas_equalTo(64);
+        make.bottom.mas_equalTo(-49);
         
     }];
 }
@@ -174,12 +134,12 @@
     
     [self transitionFromOldViewController:currentVC toNewViewController:self.allViewController];
     
-    WS(weakSelf);
+    WS(weakSelf)
     [self.allViewController.view mas_makeConstraints:^(MASConstraintMaker *make) {
         
-        make.left.right.equalTo(weakSelf.view);
-        make.top.equalTo(@64);
-        make.bottom.equalTo(@(-49));
+        make.left.right.mas_equalTo(weakSelf.view);
+        make.top.mas_equalTo(64);
+        make.bottom.mas_equalTo(-49);
     }];
 }
 
@@ -188,12 +148,17 @@
 //转换子视图控制器
 - (void)transitionFromOldViewController:(CBViewController *)oldViewController toNewViewController:(CBViewController *)newViewController{
     [self transitionFromViewController:oldViewController toViewController:newViewController duration:0.25 options:UIViewAnimationOptionTransitionNone animations:nil completion:^(BOOL finished) {
+        
+        
+        
         if (finished) {
             [newViewController didMoveToParentViewController:self];
             currentVC = newViewController;
         }else{
             currentVC = oldViewController;
         }
+        
+        
     }];
 }
 
@@ -202,6 +167,8 @@
 {
     if (!_hotViewController) {
         _hotViewController = [[CircleHotViewController alloc] init];
+        _hotViewController.isChridController = @"1";
+        
     }
     return _hotViewController;
 }
@@ -210,10 +177,46 @@
 {
     if (!_allViewController) {
         _allViewController = [[CircleAllViewController alloc] init];
+        
     }
     return _allViewController;
 }
 
+
+- (UIView *)titleView
+{
+    if (!_titleView) {
+        _titleView = [[UIView alloc] init];
+        
+        button_hot = [UIButton buttonWithType:UIButtonTypeCustom];
+        
+        [button_hot setTitle:@"热帖" forState:UIControlStateNormal];
+        [button_hot setTitleColor:Navi_Title_Color forState:UIControlStateNormal];
+        button_hot.layer.borderWidth = 1;
+        button_hot.layer.borderColor = white_color.CGColor;
+        button_hot.backgroundColor = white_color;
+        [button_hot addTarget:self action:@selector(touchButtonHot:) forControlEvents:UIControlEventTouchUpInside];
+        button_hot.titleLabel.font = [UIFont systemFontOfSize:14];
+        
+        button_all = [UIButton buttonWithType:UIButtonTypeCustom];
+        
+        [button_all setTitle:@"圈子" forState:UIControlStateNormal];
+        [button_all setTitleColor:white_color forState:UIControlStateNormal];
+        button_all.layer.borderWidth = 1;
+        button_all.layer.borderColor = white_color.CGColor;
+        button_all.backgroundColor = Navi_Title_Color;
+        [button_all addTarget:self action:@selector(touchButtonAll:) forControlEvents:UIControlEventTouchUpInside];
+        button_all.titleLabel.font = [UIFont systemFontOfSize:14];
+        
+        button_hot.userInteractionEnabled = NO;
+        button_all.userInteractionEnabled = YES;
+
+        
+        [_titleView addSubview:button_hot];
+        [_titleView addSubview:button_all];
+    }
+    return _titleView;
+}
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];

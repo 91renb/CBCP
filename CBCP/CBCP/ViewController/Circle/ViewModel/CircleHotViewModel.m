@@ -114,7 +114,7 @@
                 
                 @strongify(self);
                 
-                [self.httpManager requestWithPath:K_URL_Circle_Hot paramenters:@{} HttpRequestType:HttpRequestPost success:^(NSURLSessionDataTask *task, id responseObject) {
+                [self.httpManager requestWithPath:self.boardId.length ? K_URL_Circle_Detail(self.boardId) : K_URL_Circle_Hot paramenters:@{} HttpRequestType:HttpRequestPost success:^(NSURLSessionDataTask *task, id responseObject) {
                     NSDictionary *responseJSON = [NSJSONSerialization JSONObjectWithData:responseObject options:NSJSONReadingMutableLeaves error:nil];
                     [subscriber sendNext:responseJSON];
                     [subscriber sendCompleted];
@@ -145,7 +145,7 @@
                 
                 @strongify(self);
                 
-                [self.httpManager requestWithPath:K_URL_Circle_Hot_Next(self.lastPostId) paramenters:@{} HttpRequestType:HttpRequestPost success:^(NSURLSessionDataTask *task, id responseObject) {
+                [self.httpManager requestWithPath:self.boardId.length ? K_URL_Circle_Detail_Next(self.boardId, self.lastPostId) : K_URL_Circle_Hot_Next(self.lastPostId) paramenters:@{} HttpRequestType:HttpRequestPost success:^(NSURLSessionDataTask *task, id responseObject) {
                     
                     NSDictionary *responseJSON = [NSJSONSerialization JSONObjectWithData:responseObject options:NSJSONReadingMutableLeaves error:nil];
                     [subscriber sendNext:responseJSON];

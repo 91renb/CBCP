@@ -10,4 +10,6 @@
 
 @interface CircleHotViewController : CBViewController
 
+@property (nonatomic ,copy) NSString *boardId;
+@property (nonatomic ,copy) NSString *isChridController;
 @end

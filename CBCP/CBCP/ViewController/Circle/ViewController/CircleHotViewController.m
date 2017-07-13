@@ -30,8 +30,12 @@
     WS(weakSelf)
     
     [self.mainView mas_makeConstraints:^(MASConstraintMaker *make) {
-        
-        make.edges.equalTo(weakSelf.view);
+        make.left.right.bottom.mas_equalTo(weakSelf.view);
+        if (weakSelf.isChridController.length) {
+            make.top.mas_equalTo(0);
+        }else{
+            make.top.mas_equalTo(64);
+        }
     }];
     [super updateViewConstraints];
 }
@@ -40,8 +44,8 @@
 {
     [self.view addSubview:self.mainView];
 
-    [self.view setNeedsUpdateConstraints];
-    [self.view updateConstraintsIfNeeded];
+//    [self.view setNeedsUpdateConstraints];
+//    [self.view updateConstraintsIfNeeded];
 }
 
 - (void)cb_bindViewModel
@@ -51,15 +55,15 @@
 
 - (void)cb_layoutNavigation
 {
-    [self.navigationV removeFromSuperview];
+    if (self.isChridController.length) {
+        [self.navigationV removeFromSuperview];
+    }
 }
 
 - (void)cb_getNewData
 {
     
 }
-
-
 
 
 

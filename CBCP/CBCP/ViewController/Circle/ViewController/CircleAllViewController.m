@@ -9,7 +9,9 @@
 #import "CircleAllViewController.h"
 #import "CircleAllViewModel.h"
 #import "CircleAllView.h"
-
+#import "CircleAllModel.h"
+#import "CircleHotViewController.h"
+#import "HomeViewController.h"
 @interface CircleAllViewController ()
 
 @property (nonatomic ,strong) CircleAllViewModel *viewModel;
@@ -29,7 +31,7 @@
 {
     WS(weakSelf);
     [self.mainView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.edges.equalTo(weakSelf.view);
+        make.top.left.right.bottom.mas_equalTo(weakSelf.view);
     }];
     
     [super updateViewConstraints];
@@ -45,7 +47,16 @@
 
 - (void)cb_bindViewModel
 {
-    
+    [self.viewModel.cellClickSubject subscribeNext:^(id x) {
+        NSInteger index = [x integerValue];
+        CircleAllModel *model = [self.viewModel.dataArray objectAtIndex:index];
+        
+        CircleHotViewController *detail = [[CircleHotViewController alloc] init];
+        detail.boardId = model.boardId;
+        detail.hidesBottomBarWhenPushed = YES;
+        [self.navigationController pushViewController:detail animated:YES];
+        
+    }];
 }
 
 

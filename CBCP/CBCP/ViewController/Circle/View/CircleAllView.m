@@ -119,11 +119,14 @@
     CircleAllModel *model = self.viewModel.dataArray[indexPath.row];
     
     cell.model = model;
-    [cell useCellFrameCacheWithIndexPath:indexPath tableView:tableView];
     
     return cell;
 }
 
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    [self.viewModel.cellClickSubject sendNext:@(indexPath.row)];
+}
 
 
 

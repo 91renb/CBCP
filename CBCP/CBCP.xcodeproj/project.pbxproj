@@ -1151,7 +1151,7 @@
 				TargetAttributes = {
 					4BCD0EF51EC6F5DD007BFBE0 = {
 						CreatedOnToolsVersion = 8.3.1;
-						DevelopmentTeam = 38JM24984T;
+						DevelopmentTeam = JT8T3CH4R4;
 						ProvisioningStyle = Automatic;
 						SystemCapabilities = {
 							com.apple.BackgroundModes = {
@@ -1519,7 +1519,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CODE_SIGN_ENTITLEMENTS = CBCP/CBCP.entitlements;
-				DEVELOPMENT_TEAM = 38JM24984T;
+				DEVELOPMENT_TEAM = JT8T3CH4R4;
 				GCC_PREFIX_HEADER = /Users/LC/Desktop/CBCP/CBCP/CBCP/Macro/HeaderMacro.h;
 				INFOPLIST_FILE = "$(SRCROOT)/CBCP/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
@@ -1527,7 +1527,7 @@
 					"$(inherited)",
 					"$(PROJECT_DIR)/CBCP/Third/JPush",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.2017.LCcaibao278;
+				PRODUCT_BUNDLE_IDENTIFIER = com.2017.LC;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Debug;
@@ -1539,7 +1539,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CODE_SIGN_ENTITLEMENTS = CBCP/CBCP.entitlements;
-				DEVELOPMENT_TEAM = 38JM24984T;
+				DEVELOPMENT_TEAM = JT8T3CH4R4;
 				GCC_PREFIX_HEADER = /Users/LC/Desktop/CBCP/CBCP/CBCP/Macro/HeaderMacro.h;
 				INFOPLIST_FILE = "$(SRCROOT)/CBCP/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
@@ -1547,7 +1547,7 @@
 					"$(inherited)",
 					"$(PROJECT_DIR)/CBCP/Third/JPush",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.2017.LCcaibao278;
+				PRODUCT_BUNDLE_IDENTIFIER = com.2017.LC;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Release;

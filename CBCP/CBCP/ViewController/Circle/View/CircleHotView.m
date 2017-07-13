@@ -173,7 +173,8 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    CircleHotModel *model = self.viewModel.dataArray[indexPath.row];
+    [self.viewModel.cellClickSubject sendNext:@(indexPath.row)];
+//    CircleHotModel *model = self.viewModel.dataArray[indexPath.row];
 //    OneCircleViewController *circle = [OneCircleViewController new];
 //    circle.listModel = model;
 //    [self.navigationController pushViewController:circle animated:YES];

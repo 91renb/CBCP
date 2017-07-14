@@ -9,6 +9,8 @@
 #import "CircleHotViewController.h"
 #import "CircleHotViewModel.h"
 #import "CircleHotView.h"
+#import "CircleHotModel.h"
+#import "CircleDetailViewController.h"
 
 @interface CircleHotViewController ()
 
@@ -44,13 +46,20 @@
 {
     [self.view addSubview:self.mainView];
 
-//    [self.view setNeedsUpdateConstraints];
-//    [self.view updateConstraintsIfNeeded];
+    [self.view setNeedsUpdateConstraints];
+    [self.view updateConstraintsIfNeeded];
 }
 
 - (void)cb_bindViewModel
 {
-    
+    [self.viewModel.cellClickSubject subscribeNext:^(id x) {
+        NSInteger index = [x integerValue];
+        CircleHotModel *model = self.viewModel.dataArray[index];
+        CircleDetailViewController *circle = [CircleDetailViewController new];
+        circle.postId = model.postId;
+        [self.navigationController pushViewController:circle animated:YES];
+        
+    }];
 }
 
 - (void)cb_layoutNavigation

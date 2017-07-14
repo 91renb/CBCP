@@ -9,7 +9,6 @@
 
 #import "CircleHotCell.h"
 #import "CircleHotPhotoView.h"
-#import "UIView+SDAutoLayout.h"
 #import "CircleHotView.h"
 #import "CircleHotModel.h"
 
@@ -175,23 +174,43 @@
 
 - (void)userNameClicked
 {
-    if ([self.delegate respondsToSelector:@selector(didClickUserNameInCell:)]) {
-        [self.delegate didClickUserNameInCell:self];
-    }
+    [self.nameClickSubject sendNext:self.indexPath];
 }
 
 - (void)likeButtonClicked
 {
-    if ([self.delegate respondsToSelector:@selector(didClickLikeButtonInCell:)]) {
-        [self.delegate didClickLikeButtonInCell:self];
-    }
+    [self.likeClickSubject sendNext:self.indexPath];
+
 }
 
 - (void)commentButtonClicked
 {
-    if ([self.delegate respondsToSelector:@selector(didClickCommentButtonInCell:)]) {
-        [self.delegate didClickCommentButtonInCell:self];
+    [self.commentClickSubject sendNext:self.indexPath];
+
+}
+
+- (RACSubject *)nameClickSubject
+{
+    if (!_nameClickSubject) {
+        _nameClickSubject = [RACSubject subject];
     }
+    return _nameClickSubject;
+}
+
+- (RACSubject *)likeClickSubject
+{
+    if (!_likeClickSubject) {
+        _likeClickSubject = [RACSubject subject];
+    }
+    return _likeClickSubject;
+}
+
+- (RACSubject *)commentClickSubject
+{
+    if (!_commentClickSubject) {
+        _commentClickSubject = [RACSubject subject];
+    }
+    return _commentClickSubject;
 }
 
 

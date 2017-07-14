@@ -7,7 +7,6 @@
 //
 
 #import "CircleHotPhotoView.h"
-#import "UIView+SDAutoLayout.h"
 #import "SDPhotoBrowser.h"
 #import "CircleHotModel.h"
 @interface CircleHotPhotoView ()<SDPhotoBrowserDelegate>

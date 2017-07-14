@@ -17,6 +17,11 @@
 		4B217D4C1ED0213100BA8163 /* CircleAllModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 4B217D4B1ED0213100BA8163 /* CircleAllModel.m */; };
 		4B217D4F1ED0256100BA8163 /* CircleHotPhotoView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4B217D4E1ED0256100BA8163 /* CircleHotPhotoView.m */; };
 		4B217D521ED0257700BA8163 /* CircleHotCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 4B217D511ED0257700BA8163 /* CircleHotCell.m */; };
+		4B61E6B31F1780EE00F8FB66 /* CircleDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4B61E6B21F1780EE00F8FB66 /* CircleDetailViewController.m */; };
+		4B61E6B61F17813600F8FB66 /* CircleDetailView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4B61E6B51F17813600F8FB66 /* CircleDetailView.m */; };
+		4B61E6B91F17815600F8FB66 /* CircleDetailCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 4B61E6B81F17815600F8FB66 /* CircleDetailCell.m */; };
+		4B61E6BF1F1867C800F8FB66 /* CircleDetailViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 4B61E6BE1F1867C800F8FB66 /* CircleDetailViewModel.m */; };
+		4B61E6C21F1871E100F8FB66 /* CircleCommentModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 4B61E6C11F1871E100F8FB66 /* CircleCommentModel.m */; };
 		4B6F61D11ED2E7F100AC738E /* CircleAllCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 4B6F61D01ED2E7F100AC738E /* CircleAllCell.m */; };
 		4B6F61D41ED2E80500AC738E /* CircleAllView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4B6F61D31ED2E80500AC738E /* CircleAllView.m */; };
 		4BBEBB3F1EC6FE2100EF4F04 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4BBEBB3E1EC6FE2100EF4F04 /* Images.xcassets */; };
@@ -193,6 +198,16 @@
 		4B217D4E1ED0256100BA8163 /* CircleHotPhotoView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CircleHotPhotoView.m; sourceTree = "<group>"; };
 		4B217D501ED0257700BA8163 /* CircleHotCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CircleHotCell.h; sourceTree = "<group>"; };
 		4B217D511ED0257700BA8163 /* CircleHotCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CircleHotCell.m; sourceTree = "<group>"; };
+		4B61E6B11F1780EE00F8FB66 /* CircleDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CircleDetailViewController.h; sourceTree = "<group>"; };
+		4B61E6B21F1780EE00F8FB66 /* CircleDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CircleDetailViewController.m; sourceTree = "<group>"; };
+		4B61E6B41F17813600F8FB66 /* CircleDetailView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CircleDetailView.h; sourceTree = "<group>"; };
+		4B61E6B51F17813600F8FB66 /* CircleDetailView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CircleDetailView.m; sourceTree = "<group>"; };
+		4B61E6B71F17815600F8FB66 /* CircleDetailCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CircleDetailCell.h; sourceTree = "<group>"; };
+		4B61E6B81F17815600F8FB66 /* CircleDetailCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CircleDetailCell.m; sourceTree = "<group>"; };
+		4B61E6BD1F1867C800F8FB66 /* CircleDetailViewModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CircleDetailViewModel.h; sourceTree = "<group>"; };
+		4B61E6BE1F1867C800F8FB66 /* CircleDetailViewModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CircleDetailViewModel.m; sourceTree = "<group>"; };
+		4B61E6C01F1871E100F8FB66 /* CircleCommentModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CircleCommentModel.h; sourceTree = "<group>"; };
+		4B61E6C11F1871E100F8FB66 /* CircleCommentModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CircleCommentModel.m; sourceTree = "<group>"; };
 		4B6F61CF1ED2E7F100AC738E /* CircleAllCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CircleAllCell.h; sourceTree = "<group>"; };
 		4B6F61D01ED2E7F100AC738E /* CircleAllCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CircleAllCell.m; sourceTree = "<group>"; };
 		4B6F61D21ED2E80500AC738E /* CircleAllView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CircleAllView.h; sourceTree = "<group>"; };
@@ -922,6 +937,8 @@
 				4B217D481ED0212100BA8163 /* CircleHotModel.m */,
 				4B217D4A1ED0213100BA8163 /* CircleAllModel.h */,
 				4B217D4B1ED0213100BA8163 /* CircleAllModel.m */,
+				4B61E6C01F1871E100F8FB66 /* CircleCommentModel.h */,
+				4B61E6C11F1871E100F8FB66 /* CircleCommentModel.m */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -939,6 +956,10 @@
 				4B6F61D31ED2E80500AC738E /* CircleAllView.m */,
 				4B6F61CF1ED2E7F100AC738E /* CircleAllCell.h */,
 				4B6F61D01ED2E7F100AC738E /* CircleAllCell.m */,
+				4B61E6B41F17813600F8FB66 /* CircleDetailView.h */,
+				4B61E6B51F17813600F8FB66 /* CircleDetailView.m */,
+				4B61E6B71F17815600F8FB66 /* CircleDetailCell.h */,
+				4B61E6B81F17815600F8FB66 /* CircleDetailCell.m */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -952,6 +973,8 @@
 				4B217D361ED01A6500BA8163 /* CircleHotViewController.m */,
 				4B217D3B1ED01AB800BA8163 /* CircleAllViewController.h */,
 				4B217D3C1ED01AB800BA8163 /* CircleAllViewController.m */,
+				4B61E6B11F1780EE00F8FB66 /* CircleDetailViewController.h */,
+				4B61E6B21F1780EE00F8FB66 /* CircleDetailViewController.m */,
 			);
 			path = ViewController;
 			sourceTree = "<group>";
@@ -963,6 +986,8 @@
 				4B217D3F1ED01DEC00BA8163 /* CircleHotViewModel.m */,
 				4B217D411ED01DFF00BA8163 /* CircleAllViewModel.h */,
 				4B217D421ED01DFF00BA8163 /* CircleAllViewModel.m */,
+				4B61E6BD1F1867C800F8FB66 /* CircleDetailViewModel.h */,
+				4B61E6BE1F1867C800F8FB66 /* CircleDetailViewModel.m */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -1323,6 +1348,7 @@
 				4BDDA9461ECBF38100C3836B /* CBSVProgressHUD.m in Sources */,
 				4BBEBD511EC70DC700EF4F04 /* CBHttpManager.m in Sources */,
 				4BBEBD341EC7096100EF4F04 /* UIView+HXExtension.m in Sources */,
+				4B61E6B31F1780EE00F8FB66 /* CircleDetailViewController.m in Sources */,
 				4BBEBD331EC7096100EF4F04 /* UIImage+HXExtension.m in Sources */,
 				4BBEBCF01EC7096100EF4F04 /* HXPresentTransition.m in Sources */,
 				4BDDA92A1ECBE05A00C3836B /* HomeListView.m in Sources */,
@@ -1344,6 +1370,7 @@
 				4BBEBCE81EC7096100EF4F04 /* HXPhotoModel.m in Sources */,
 				4BBEBD4E1EC70DC000EF4F04 /* UIColor+CBExt.m in Sources */,
 				4BBEBCE41EC7096100EF4F04 /* HXCameraViewController.m in Sources */,
+				4B61E6B61F17813600F8FB66 /* CircleDetailView.m in Sources */,
 				4BBEBD471EC70DA200EF4F04 /* CBAlertHelper.m in Sources */,
 				4BBEBCF31EC7096100EF4F04 /* HXVideoPreviewViewController.m in Sources */,
 				4BDDA9361ECBEB5600C3836B /* HomeHeaderModel.m in Sources */,
@@ -1363,6 +1390,7 @@
 				4BBEBD371EC7096100EF4F04 /* TAAbstractDotView.m in Sources */,
 				4BBEBD401EC7096100EF4F04 /* SDWaitingView.m in Sources */,
 				4BBEBD3E1EC7096100EF4F04 /* SDBrowserImageView.m in Sources */,
+				4B61E6C21F1871E100F8FB66 /* CircleCommentModel.m in Sources */,
 				4BBEBCE21EC7096100EF4F04 /* HXAlbumTitleButton.m in Sources */,
 				4B6F61D41ED2E80500AC738E /* CircleAllView.m in Sources */,
 				4BBEBD321EC7096100EF4F04 /* UIButton+HXExtension.m in Sources */,
@@ -1386,6 +1414,7 @@
 				4BBEBD4D1EC70DC000EF4F04 /* UIViewController+HUD.m in Sources */,
 				4BBEBCEB1EC7096100EF4F04 /* HXPhotoSubViewCell.m in Sources */,
 				4BDDA8C81ECAB3E200C3836B /* CBCustomNavigationView.m in Sources */,
+				4B61E6B91F17815600F8FB66 /* CircleDetailCell.m in Sources */,
 				4B217D491ED0212100BA8163 /* CircleHotModel.m in Sources */,
 				4BDDA8DD1ECADA3F00C3836B /* CBCollectionViewCell.m in Sources */,
 				4BDDA9301ECBEB1F00C3836B /* HomeHeaderViewModel.m in Sources */,
@@ -1393,6 +1422,7 @@
 				4B217D371ED01A6500BA8163 /* CircleHotViewController.m in Sources */,
 				4BBEBD3A1EC7096100EF4F04 /* TAPageControl.m in Sources */,
 				4BBEBCE11EC7096100EF4F04 /* HXAlbumModel.m in Sources */,
+				4B61E6BF1F1867C800F8FB66 /* CircleDetailViewModel.m in Sources */,
 				4BBEBD361EC7096100EF4F04 /* MBProgressHUD.m in Sources */,
 				4BBEBD3C1EC7096100EF4F04 /* SDCycleScrollView.m in Sources */,
 			);

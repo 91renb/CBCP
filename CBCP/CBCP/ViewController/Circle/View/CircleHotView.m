@@ -9,10 +9,7 @@
 #import "CircleHotView.h"
 #import "CircleHotViewModel.h"
 #import "CircleHotCell.h"
-#import "UIView+SDAutoLayout.h"
-#import "UITableView+SDAutoTableViewCellHeight.h"
 #import "CircleHotModel.h"
-
 @interface CircleHotView ()<UITableViewDelegate,UITableViewDataSource>
 
 @property (nonatomic ,strong) CircleHotViewModel *viewModel;
@@ -151,7 +148,7 @@
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    CircleHotCell *model = self.viewModel.dataArray[indexPath.row];
+    CircleHotModel *model = self.viewModel.dataArray[indexPath.row];
     return [self.tableView cellHeightForIndexPath:indexPath model:model keyPath:@"model" cellClass:[CircleHotCell class] contentViewWidth:SCREEN_WIDTH];
 }
 
@@ -163,21 +160,33 @@
     }
     
     CircleHotModel *model = self.viewModel.dataArray[indexPath.row];
-    
+    cell.indexPath = indexPath;
     cell.model = model;
-    cell.delegate = self;
     [cell useCellFrameCacheWithIndexPath:indexPath tableView:tableView];
-    
+    @weakify(self);
+    [[cell.nameClickSubject takeUntil:cell.rac_prepareForReuseSignal] subscribeNext:^(id x) {
+        NSIndexPath *index = x;
+        NSLog(@"%ld",index.row);
+    }];
+    [[cell.commentClickSubject takeUntil:cell.rac_prepareForReuseSignal] subscribeNext:^(id x) {
+        @strongify(self);
+
+        NSIndexPath *index = x;
+        [self.viewModel.cellClickSubject sendNext:@(index.row)];
+    }];
+    [[cell.likeClickSubject takeUntil:cell.rac_prepareForReuseSignal] subscribeNext:^(id x) {
+        @strongify(self);
+        NSIndexPath *index = x;
+        NSLog(@"%ld",index.row);
+        [self didClickLikeButtonWithIndexPath:index];
+    }];
     return cell;
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     [self.viewModel.cellClickSubject sendNext:@(indexPath.row)];
-//    CircleHotModel *model = self.viewModel.dataArray[indexPath.row];
-//    OneCircleViewController *circle = [OneCircleViewController new];
-//    circle.listModel = model;
-//    [self.navigationController pushViewController:circle animated:YES];
+
 }
 
 #pragma mark - CircleDetailDelegate
@@ -190,10 +199,9 @@
 //    [self.navigationController pushViewController:circle animated:YES];
 }
 
-- (void)didClickLikeButtonInCell:(UITableViewCell *)cell
+- (void)didClickLikeButtonWithIndexPath:(NSIndexPath *)indexPath
 {
-    NSIndexPath *index = [self.tableView indexPathForCell:cell];
-    __block CircleHotModel *model = self.viewModel.dataArray[index.row];
+    __block CircleHotModel *model = self.viewModel.dataArray[indexPath.row];
     
     NSInteger count = [model.likeCount integerValue];
     
@@ -207,7 +215,7 @@
         model.like = @"";
     }
     model.likeCount = [NSString stringWithFormat:@"%ld",count];
-    [self.tableView reloadRowsAtIndexPaths:@[index] withRowAnimation:UITableViewRowAnimationNone];
+    [self.tableView reloadRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationNone];
     
 }
 

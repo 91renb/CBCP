@@ -10,8 +10,6 @@
 #import "CircleAllViewModel.h"
 #import "CircleAllCell.h"
 #import "CircleAllModel.h"
-#import "UIView+SDAutoLayout.h"
-#import "UITableView+SDAutoTableViewCellHeight.h"
 
 @interface CircleAllView ()<UITableViewDelegate,UITableViewDataSource>
 

@@ -8,23 +8,12 @@
 
 #import "CBTableViewCell.h"
 
-@protocol CircleDetailDelegate <NSObject>
-
-//点赞
-- (void)didClickLikeButtonInCell:(UITableViewCell *)cell;
-//评论
-- (void)didClickCommentButtonInCell:(UITableViewCell *)cell;
-//用户
-- (void)didClickUserNameInCell:(UITableViewCell *)cell;
-
-
-@end
-
 @class CircleHotModel;
 @interface CircleHotCell : CBTableViewCell
 
 @property (nonatomic ,strong) CircleHotModel *model;
-
-@property (nonatomic ,weak) id<CircleDetailDelegate> delegate;
-
+@property (nonatomic ,strong) NSIndexPath *indexPath;
+@property (nonatomic ,strong) RACSubject *nameClickSubject;
+@property (nonatomic ,strong) RACSubject *likeClickSubject;
+@property (nonatomic ,strong) RACSubject *commentClickSubject;
 @end

@@ -7,9 +7,8 @@
 //
 
 #import "CBViewController.h"
-
+@class CircleHotModel;
 @interface CircleDetailViewController : CBViewController
 
-@property (nonatomic ,copy) NSString *postId;
-
+@property (nonatomic ,strong) CircleHotModel *model;
 @end

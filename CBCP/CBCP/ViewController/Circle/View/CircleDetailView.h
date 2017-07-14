@@ -8,6 +8,10 @@
 
 #import "CBView.h"
 
+@class CircleHotModel;
+
 @interface CircleDetailView : CBView
+
+@property (nonatomic ,strong) CircleHotModel *model;
 
 @end

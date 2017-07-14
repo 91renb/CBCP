@@ -38,13 +38,21 @@
     avatarImageView.userInteractionEnabled = YES;
     avatarImageView.layer.cornerRadius = 20;
     avatarImageView.clipsToBounds = YES;
-    UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(userNameClicked)];
-    [avatarImageView addGestureRecognizer:tap];
+    UITapGestureRecognizer *tapGesture = [[UITapGestureRecognizer alloc] init];
+    [[tapGesture rac_gestureSignal] subscribeNext:^(id x) {
+        [self.nameClickSubject sendNext:self.indexPath];
+    }];
+
+    [avatarImageView addGestureRecognizer:tapGesture];
     
     //昵称
     nameButton = [UIButton new];
     [nameButton setTitleColor:Navi_Title_Color forState:UIControlStateNormal];
-    [nameButton addTarget:self action:@selector(userNameClicked) forControlEvents:UIControlEventTouchUpInside];
+    [[nameButton rac_signalForControlEvents:UIControlEventTouchUpInside] subscribeNext:^(id x) {
+        [self.nameClickSubject sendNext:self.indexPath];
+
+    }];
+    
     nameButton.titleLabel.font = [UIFont systemFontOfSize:15];
     
     //发表内容
@@ -61,7 +69,10 @@
     likeButton = [UIButton new];
     [likeButton setImage:[UIImage imageNamed:@"like"] forState:UIControlStateNormal];
     [likeButton setImage:[UIImage imageNamed:@"like_select"] forState:UIControlStateSelected];
-    [likeButton addTarget:self action:@selector(likeButtonClicked) forControlEvents:UIControlEventTouchUpInside];
+    [[likeButton rac_signalForControlEvents:UIControlEventTouchUpInside] subscribeNext:^(id x) {
+        [self.likeClickSubject sendNext:self.indexPath];
+        
+    }];
     
     //点赞人数
     likeNumLabel = [UILabel new];
@@ -71,8 +82,10 @@
     //评论按钮
     commentButton = [UIButton new];
     [commentButton setImage:[UIImage imageNamed:@"comment"] forState:UIControlStateNormal];
-    [commentButton addTarget:self action:@selector(commentButtonClicked) forControlEvents:UIControlEventTouchUpInside];
-    
+    [[commentButton rac_signalForControlEvents:UIControlEventTouchUpInside] subscribeNext:^(id x) {
+        [self.commentClickSubject sendNext:self.indexPath];
+        
+    }];
     commentNumLabel = [UILabel new];
     commentNumLabel.text = @"评论";
     commentNumLabel.font = [UIFont systemFontOfSize:12];
@@ -141,6 +154,9 @@
 
 - (void)setModel:(CircleHotModel *)model
 {
+    if (!model) {
+        return;
+    }
     _model = model;
     
     [avatarImageView sd_setImageWithURL:[NSURL URLWithString:model.avatarUrl] placeholderImage:[UIImage imageNamed:@"avatar"]];
@@ -169,24 +185,6 @@
     
     [self setupAutoHeightWithBottomView:timeLabel bottomMargin:15];
     
-}
-
-
-- (void)userNameClicked
-{
-    [self.nameClickSubject sendNext:self.indexPath];
-}
-
-- (void)likeButtonClicked
-{
-    [self.likeClickSubject sendNext:self.indexPath];
-
-}
-
-- (void)commentButtonClicked
-{
-    [self.commentClickSubject sendNext:self.indexPath];
-
 }
 
 - (RACSubject *)nameClickSubject

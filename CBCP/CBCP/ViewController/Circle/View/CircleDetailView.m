@@ -12,6 +12,7 @@
 #import "CircleCommentModel.h"
 #import "CircleHotModel.h"
 #import "CircleHotCell.h"
+
 @interface CircleDetailView ()<UITableViewDelegate,UITableViewDataSource>
 
 @property (nonatomic ,strong) UITableView *tableView;
@@ -126,7 +127,8 @@
         _tableView.dataSource = self;
         _tableView.tableFooterView = [[UIView alloc] initWithFrame:CGRectZero];
         _tableView.tableHeaderView = [[UIView alloc] initWithFrame:CGRectZero];
-        [_tableView registerClass:[CircleDetailCell class] forCellReuseIdentifier:@"cell"];
+        [_tableView registerClass:[CircleDetailCell class] forCellReuseIdentifier:@"detailCell"];
+        [_tableView registerClass:[CircleHotCell class] forCellReuseIdentifier:@"hotCell"];
         
         WS(weakSelf)
         _tableView.mj_header = [MJRefreshNormalHeader headerWithRefreshingBlock:^{
@@ -144,54 +146,69 @@
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
-    return 1;
+    return 2;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return 1;
-//    return self.viewModel.dataArray.count;
+    if (section == 0) {
+        return 1;
+    }else {
+        
+        return self.viewModel.dataArray.count;
+    }
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    CircleHotModel *model = self.viewModel.dataArray[indexPath.row];
-    return [self.tableView cellHeightForIndexPath:indexPath model:model keyPath:@"model" cellClass:[CircleHotCell class] contentViewWidth:SCREEN_WIDTH];
+    if (indexPath.section == 0) {
+        
+        return [self.tableView cellHeightForIndexPath:indexPath model:self.model keyPath:@"model" cellClass:[CircleHotCell class] contentViewWidth:SCREEN_WIDTH];
+    }else{
+        CircleCommentModel *model = self.viewModel.dataArray[indexPath.row];
+        return [self.tableView cellHeightForIndexPath:indexPath model:model keyPath:@"model" cellClass:[CircleDetailCell class] contentViewWidth:SCREEN_WIDTH];
+
+    }
+
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    CircleHotCell *cell = [tableView dequeueReusableCellWithIdentifier:@"cell"];
-    if (cell == nil) {
-        cell = [[CircleHotCell alloc] initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:@"cell"];
+    if (indexPath.section == 0) {
+        
+        CircleHotCell *cell = [tableView dequeueReusableCellWithIdentifier:@"hotCell"];
+        if (cell == nil) {
+            cell = [[CircleHotCell alloc] initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:@"hotCell"];
+        }
+        
+        cell.model = self.model;
+        [cell useCellFrameCacheWithIndexPath:indexPath tableView:tableView];
+        
+        return cell;
+        
+    }else{
+        
+        CircleDetailCell *cell = [tableView dequeueReusableCellWithIdentifier:@"detailCell"];
+        if (cell == nil) {
+            cell = [[CircleDetailCell alloc] initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:@"detailCell"];
+        }
+        
+        CircleCommentModel *model = self.viewModel.dataArray[indexPath.row];
+        cell.indexPath = indexPath;
+        cell.model = model;
+        [cell useCellFrameCacheWithIndexPath:indexPath tableView:tableView];
+        
+        return cell;
+        
     }
-    
-    CircleHotModel *model = self.viewModel.dataArray[indexPath.row];
-    
-    cell.model = model;
-    [cell useCellFrameCacheWithIndexPath:indexPath tableView:tableView];
-    
-    return cell;
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     [self.viewModel.cellClickSubject sendNext:@(indexPath.row)];
-    //    CircleHotModel *model = self.viewModel.dataArray[indexPath.row];
-    //    OneCircleViewController *circle = [OneCircleViewController new];
-    //    circle.listModel = model;
-    //    [self.navigationController pushViewController:circle animated:YES];
 }
 
-#pragma mark - CircleDetailDelegate
-- (void)didClickUserNameInCell:(UITableViewCell *)cell
-{
-    //    NSIndexPath *index = [self.tableView indexPathForCell:cell];
-    //    CircleListModel *model = self.dataSource[index.row];
-    //    OneCircleViewController *circle = [OneCircleViewController new];
-    //    circle.listModel = model;
-    //    [self.navigationController pushViewController:circle animated:YES];
-}
+
 
 - (void)didClickLikeButtonInCell:(UITableViewCell *)cell
 {
@@ -212,15 +229,6 @@
     model.likeCount = [NSString stringWithFormat:@"%ld",count];
     [self.tableView reloadRowsAtIndexPaths:@[index] withRowAnimation:UITableViewRowAnimationNone];
     
-}
-
-- (void)didClickCommentButtonInCell:(UITableViewCell *)cell
-{
-    //    NSIndexPath *index = [self.tableView indexPathForCell:cell];
-    //    CircleListModel *model = self.dataSource[index.row];
-    //    OneCircleViewController *circle = [OneCircleViewController new];
-    //    circle.listModel = model;
-    //    [self.navigationController pushViewController:circle animated:YES];
 }
 
 

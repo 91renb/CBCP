@@ -163,23 +163,26 @@
     cell.indexPath = indexPath;
     cell.model = model;
     [cell useCellFrameCacheWithIndexPath:indexPath tableView:tableView];
+    
     @weakify(self);
     [[cell.nameClickSubject takeUntil:cell.rac_prepareForReuseSignal] subscribeNext:^(id x) {
         NSIndexPath *index = x;
-        NSLog(@"%ld",index.row);
+        [self.viewModel.cellClickSubject sendNext:@(index.row)];
     }];
+    
     [[cell.commentClickSubject takeUntil:cell.rac_prepareForReuseSignal] subscribeNext:^(id x) {
         @strongify(self);
 
         NSIndexPath *index = x;
         [self.viewModel.cellClickSubject sendNext:@(index.row)];
     }];
+    
     [[cell.likeClickSubject takeUntil:cell.rac_prepareForReuseSignal] subscribeNext:^(id x) {
         @strongify(self);
         NSIndexPath *index = x;
-        NSLog(@"%ld",index.row);
         [self didClickLikeButtonWithIndexPath:index];
     }];
+    
     return cell;
 }
 
@@ -187,16 +190,6 @@
 {
     [self.viewModel.cellClickSubject sendNext:@(indexPath.row)];
 
-}
-
-#pragma mark - CircleDetailDelegate
-- (void)didClickUserNameInCell:(UITableViewCell *)cell
-{
-//    NSIndexPath *index = [self.tableView indexPathForCell:cell];
-//    CircleListModel *model = self.dataSource[index.row];
-//    OneCircleViewController *circle = [OneCircleViewController new];
-//    circle.listModel = model;
-//    [self.navigationController pushViewController:circle animated:YES];
 }
 
 - (void)didClickLikeButtonWithIndexPath:(NSIndexPath *)indexPath
@@ -216,16 +209,6 @@
     }
     model.likeCount = [NSString stringWithFormat:@"%ld",count];
     [self.tableView reloadRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationNone];
-    
-}
-
-- (void)didClickCommentButtonInCell:(UITableViewCell *)cell
-{
-//    NSIndexPath *index = [self.tableView indexPathForCell:cell];
-//    CircleListModel *model = self.dataSource[index.row];
-//    OneCircleViewController *circle = [OneCircleViewController new];
-//    circle.listModel = model;
-//    [self.navigationController pushViewController:circle animated:YES];
 }
 
 

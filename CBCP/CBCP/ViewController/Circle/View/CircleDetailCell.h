@@ -8,6 +8,10 @@
 
 #import "CBTableViewCell.h"
 
+@class CircleCommentModel;
 @interface CircleDetailCell : CBTableViewCell
+
+@property (nonatomic ,strong) CircleCommentModel *model;
+@property (nonatomic ,strong) NSIndexPath *indexPath;
 
 @end

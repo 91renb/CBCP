@@ -56,7 +56,7 @@
         NSInteger index = [x integerValue];
         CircleHotModel *model = self.viewModel.dataArray[index];
         CircleDetailViewController *circle = [CircleDetailViewController new];
-        circle.postId = model.postId;
+        circle.model = model;
         [self.navigationController pushViewController:circle animated:YES];
         
     }];
@@ -92,6 +92,7 @@
     if (!_viewModel) {
         
         _viewModel = [[CircleHotViewModel alloc] init];
+        _viewModel.boardId = self.boardId;
     }
     
     return _viewModel;

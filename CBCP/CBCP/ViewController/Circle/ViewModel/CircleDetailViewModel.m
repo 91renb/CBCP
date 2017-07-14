@@ -7,6 +7,7 @@
 //
 
 #import "CircleDetailViewModel.h"
+#import "CircleCommentModel.h"
 
 @interface CircleDetailViewModel ()
 
@@ -23,28 +24,16 @@
     @weakify(self);
     [self.refreshDataCommand.executionSignals.switchToLatest subscribeNext:^(NSDictionary *responseJSON) {
         @strongify(self);
-        
-        NSArray *array = [responseJSON objectForKey:@"posts"];
+        NSLog(@"%@",responseJSON);
+        NSArray *array = [[responseJSON objectForKey:@"post"] objectForKey:@"comments"];
         NSMutableArray *resultArray = [NSMutableArray array];
-//        for (NSDictionary *dic in array) {
-//            CircleHotModel *model = [CircleHotModel new];
-//            [model setValuesForKeysWithDictionary:dic];
-//            
-//            NSMutableArray *resultImageArray = [NSMutableArray array];
-//            NSArray *imageArray = dic[@"imageList"];
-//            for (NSDictionary *diction in imageArray) {
-//                CircleHotImageModel *imageModel = [CircleHotImageModel new];
-//                [imageModel setValuesForKeysWithDictionary:diction];
-//                [resultImageArray addObject:imageModel];
-//            }
-//            
-//            model.imageList = resultImageArray;
-//            if ([model.showTag isEqualToString:@"0"]) {
-//                [resultArray addObject:model];
-//            }
-//            self.lastPostId = model.postId;
-//        }
-//        
+        for (NSDictionary *dic in array) {
+            CircleCommentModel *model = [CircleCommentModel new];
+            [model setValuesForKeysWithDictionary:dic];
+            [resultArray addObject:model];
+            self.commentId = model.commentId;
+        }
+
         self.dataArray = resultArray;
 
         [self.refreshUI sendNext:@(CBHeaderRefresh_HasMoreData)];
@@ -64,28 +53,15 @@
         
         @strongify(self);
         
-        NSArray *array = [responseJSON objectForKey:@"posts"];
+        NSArray *array = [[responseJSON objectForKey:@"post"] objectForKey:@"comments"];
         NSMutableArray *resultArray = [NSMutableArray arrayWithArray:self.dataArray];
-//        for (NSDictionary *dic in array) {
-//            CircleHotModel *model = [CircleHotModel new];
-//            [model setValuesForKeysWithDictionary:dic];
-//            
-//            NSMutableArray *resultImageArray = [NSMutableArray array];
-//            NSArray *imageArray = dic[@"imageList"];
-//            for (NSDictionary *diction in imageArray) {
-//                CircleHotImageModel *imageModel = [CircleHotImageModel new];
-//                [imageModel setValuesForKeysWithDictionary:diction];
-//                [resultImageArray addObject:imageModel];
-//            }
-//            
-//            model.imageList = resultImageArray;
-//            if ([model.showTag isEqualToString:@"0"]) {
-//                [resultArray addObject:model];
-//            }
-//            self.lastPostId = model.postId;
-//            
-//        }
-//        
+        for (NSDictionary *dic in array) {
+            CircleCommentModel *model = [CircleCommentModel new];
+            [model setValuesForKeysWithDictionary:dic];
+            [resultArray addObject:model];
+            self.commentId = model.commentId;
+        }
+        
         self.dataArray = resultArray;
         [self.refreshUI sendNext:@(CBFooterRefresh_HasMoreData)];
         DismissHud();
@@ -93,8 +69,8 @@
 }
 
 
-- (RACSubject *)refreshUI {
-    
+- (RACSubject *)refreshUI
+{
     if (!_refreshUI) {
         
         _refreshUI = [RACSubject subject];
@@ -104,8 +80,8 @@
 }
 
 
-- (RACCommand *)refreshDataCommand {
-    
+- (RACCommand *)refreshDataCommand
+{
     if (!_refreshDataCommand) {
         
         @weakify(self);
@@ -135,8 +111,8 @@
     return _refreshDataCommand;
 }
 
-- (RACCommand *)nextPageCommand {
-    
+- (RACCommand *)nextPageCommand
+{
     if (!_nextPageCommand) {
         
         @weakify(self);
@@ -168,8 +144,8 @@
 }
 
 
-- (NSArray *)dataArray {
-    
+- (NSArray *)dataArray
+{
     if (!_dataArray) {
         
         _dataArray = [[NSArray alloc] init];
@@ -178,8 +154,8 @@
     return _dataArray;
 }
 
-- (RACSubject *)cellClickSubject {
-    
+- (RACSubject *)cellClickSubject
+{
     if (!_cellClickSubject) {
         
         _cellClickSubject = [RACSubject subject];

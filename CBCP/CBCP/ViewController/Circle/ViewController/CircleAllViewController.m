@@ -31,7 +31,7 @@
 {
     WS(weakSelf);
     [self.mainView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.left.right.bottom.mas_equalTo(weakSelf.view);
+        make.edges.mas_equalTo(weakSelf.view);
     }];
     
     [super updateViewConstraints];
